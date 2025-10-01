@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Page non trouvée - Mon Site Web{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <h1 class="display-1">404</h1>
+    <h2 class="display-4">Page non trouvée</h2>
+    <p class="lead">Désolé, la page que vous recherchez n'existe pas.</p>
+    <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg">Retour à l'accueil</a>
+</div>
+{% endblock %}

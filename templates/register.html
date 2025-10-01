@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Inscription - Dino Tracker{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+        <div class="card shadow">
+            <div class="card-header text-center">
+                <h4>🦕 Inscription</h4>
+                <small class="text-muted">Système simple : nom + code</small>
+                <div class="alert alert-success alert-sm mt-2 mb-0">
+                    <small><strong>🎉 Plus simple !</strong> Juste un nom et un code, c'est tout !</small>
+                </div>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    {{ form.hidden_tag() }}
+                    
+                    <div class="mb-3">
+                        {{ form.username.label(class="form-label") }}
+                        {{ form.username(class="form-control") }}
+                        {% if form.username.errors %}
+                            <div class="text-danger small">
+                                {% for error in form.username.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="mb-3">
+                        {{ form.code.label(class="form-label") }}
+                        {{ form.code(class="form-control", placeholder="Choisissez un code simple (ex: 1234)") }}
+                        <small class="form-text text-muted">Choisissez un code simple que vous retiendrez facilement</small>
+                        {% if form.code.errors %}
+                            <div class="text-danger small">
+                                {% for error in form.code.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="d-grid">
+                        {{ form.submit(class="btn btn-primary") }}
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-center">
+                <small class="text-muted">
+                    Déjà un compte ? 
+                    <a href="{{ url_for('login') }}">Se connecter</a>
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

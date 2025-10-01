@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block title %}Contact - Mon Site Web{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8">
+        <h1 class="display-4">Contactez-nous</h1>
+        <p class="lead">N'hésitez pas à nous envoyer un message!</p>
+        
+        <form method="POST" action="{{ url_for('contact') }}" class="needs-validation" novalidate>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="name" class="form-label">Nom *</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                    <div class="invalid-feedback">
+                        Veuillez saisir votre nom.
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="email" class="form-label">Email *</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                    <div class="invalid-feedback">
+                        Veuillez saisir une adresse email valide.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-3">
+                <label for="message" class="form-label">Message *</label>
+                <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                <div class="invalid-feedback">
+                    Veuillez saisir votre message.
+                </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-lg">Envoyer le message</button>
+        </form>
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h5>Informations de contact</h5>
+            </div>
+            <div class="card-body">
+                <p><strong>Email:</strong> contact@monsite.com</p>
+                <p><strong>Téléphone:</strong> +33 1 23 45 67 89</p>
+                <p><strong>Adresse:</strong><br>
+                123 Rue de la Paix<br>
+                75001 Paris, France</p>
+            </div>
+        </div>
+        
+        <div class="card mt-3">
+            <div class="card-header">
+                <h5>Horaires</h5>
+            </div>
+            <div class="card-body">
+                <p><strong>Lundi - Vendredi:</strong> 9h00 - 18h00</p>
+                <p><strong>Samedi:</strong> 10h00 - 16h00</p>
+                <p><strong>Dimanche:</strong> Fermé</p>
+            </div>
+        </div>
+        
+        <div class="card mt-3">
+            <div class="card-body">
+                <h5 class="card-title">Suivez-nous</h5>
+                <div class="d-flex gap-2">
+                    <a href="#" class="btn btn-outline-primary btn-sm">Facebook</a>
+                    <a href="#" class="btn btn-outline-info btn-sm">Twitter</a>
+                    <a href="#" class="btn btn-outline-danger btn-sm">Instagram</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Validation Bootstrap
+(function() {
+    'use strict';
+    window.addEventListener('load', function() {
+        var forms = document.getElementsByClassName('needs-validation');
+        var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    }, false);
+})();
+</script>
+{% endblock %}

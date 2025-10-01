@@ -1,0 +1,242 @@
+/* CSS personnalisé pour le site web */
+
+/* Variables CSS */
+:root {
+    --primary-color: #0d6efd;
+    --secondary-color: #6c757d;
+    --success-color: #198754;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --info-color: #0dcaf0;
+    --light-color: #f8f9fa;
+    --dark-color: #212529;
+}
+
+/* Styles généraux */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--dark-color);
+}
+
+/* Navigation */
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+/* Cartes */
+.card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Boutons */
+.btn {
+    border-radius: 0.375rem;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+/* Formulaires */
+.form-control {
+    border-radius: 0.375rem;
+    border: 1px solid #ced4da;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* Alertes */
+.alert {
+    border-radius: 0.375rem;
+    border: none;
+}
+
+/* Footer */
+footer {
+    margin-top: auto;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .display-4 {
+        font-size: 2rem;
+    }
+    
+    .display-1 {
+        font-size: 4rem;
+    }
+    
+    .card {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Styles personnalisés pour les icônes */
+.icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+}
+
+/* Styles pour les listes */
+.list-group-item {
+    border: none;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.list-group-item:last-child {
+    border-bottom: none;
+}
+
+/* Styles pour les badges */
+.badge {
+    font-size: 0.75em;
+}
+
+/* Styles pour les progress bars */
+.progress {
+    height: 0.5rem;
+    border-radius: 0.25rem;
+}
+
+/* Styles pour les tooltips */
+.tooltip {
+    font-size: 0.875rem;
+}
+
+/* Styles pour les modales */
+.modal-content {
+    border-radius: 0.5rem;
+    border: none;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+/* Styles pour les dropdowns */
+.dropdown-menu {
+    border-radius: 0.375rem;
+    border: none;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+/* Styles pour les paginations */
+.pagination {
+    margin-bottom: 0;
+}
+
+.page-link {
+    border-radius: 0.375rem;
+    margin: 0 2px;
+    border: none;
+    color: var(--primary-color);
+}
+
+.page-link:hover {
+    background-color: var(--light-color);
+    color: var(--primary-color);
+}
+
+.page-item.active .page-link {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* Styles pour les tables */
+.table {
+    border-radius: 0.375rem;
+    overflow: hidden;
+}
+
+.table th {
+    border-top: none;
+    font-weight: 600;
+    background-color: var(--light-color);
+}
+
+/* Styles pour les accordéons */
+.accordion-item {
+    border: none;
+    margin-bottom: 0.5rem;
+    border-radius: 0.375rem;
+    overflow: hidden;
+}
+
+.accordion-button {
+    border-radius: 0.375rem;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Styles pour les carousels */
+.carousel-item {
+    border-radius: 0.375rem;
+    overflow: hidden;
+}
+
+/* Styles pour les spinners */
+.spinner-border-sm {
+    width: 1rem;
+    height: 1rem;
+}
+
+/* Styles pour les toasts */
+.toast {
+    border-radius: 0.375rem;
+    border: none;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+/* Styles pour les offcanvas */
+.offcanvas {
+    border-radius: 0.5rem;
+}
+
+/* Utilitaires personnalisés */
+.text-gradient {
+    background: linear-gradient(45deg, var(--primary-color), var(--info-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.shadow-custom {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.border-custom {
+    border: 2px solid var(--primary-color);
+    border-radius: 0.375rem;
+}

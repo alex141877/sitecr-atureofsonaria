@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Erreur serveur - Mon Site Web{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <h1 class="display-1">500</h1>
+    <h2 class="display-4">Erreur serveur</h2>
+    <p class="lead">Une erreur interne s'est produite. Veuillez réessayer plus tard.</p>
+    <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg">Retour à l'accueil</a>
+</div>
+{% endblock %}

@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block title %}Accueil - Dino Tracker{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8">
+        <h1 class="display-4">🦕 Bienvenue sur Dino Tracker!</h1>
+        <p class="lead">La plateforme parfaite pour gérer et calculer vos profits de vente de dinosaures dans votre jeu préféré!</p>
+        
+        <!-- Message temporaire de test -->
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>✅ Mise à jour réussie !</strong> Le système de connexion simplifié fonctionne maintenant parfaitement !
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        
+        <div class="row mt-5">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">📊 Suivi des ventes</h5>
+                        <p class="card-text">Enregistrez tous vos dinosaures avec prix d'achat, prix de vente et quantité.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">💰 Calcul automatique</h5>
+                        <p class="card-text">Calcul automatique des profits avec prise en compte des taxes du jeu.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">📈 Statistiques</h5>
+                        <p class="card-text">Visualisez vos performances avec des statistiques détaillées.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        {% if not current_user.is_authenticated %}
+        <div class="row mt-4">
+            <div class="col-12 text-center">
+                <h3>Commencez dès maintenant!</h3>
+                <p>Créez votre compte pour commencer à tracker vos dinosaures.</p>
+                <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg me-3">S'inscrire</a>
+                <a href="{{ url_for('login') }}" class="btn btn-outline-primary btn-lg">Se connecter</a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h5>💡 Fonctionnalités</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li>✅ Gestion de comptes utilisateurs</li>
+                    <li>✅ Ajout illimité de dinosaures</li>
+                    <li>✅ Calcul automatique des taxes</li>
+                    <li>✅ Statistiques de profit</li>
+                    <li>✅ Historique des transactions</li>
+                    <li>✅ Interface intuitive</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="card mt-3">
+            <div class="card-header">
+                <h5>🎮 Comment ça marche?</h5>
+            </div>
+            <div class="card-body">
+                <ol class="small">
+                    <li>Créez votre compte (nom + code simple)</li>
+                    <li>Ajoutez vos dinosaures avec prix d'achat</li>
+                    <li>Définissez votre prix de vente</li>
+                    <li>Le système calcule automatiquement vos profits!</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="card mt-3">
+            <div class="card-body">
+                <h5 class="card-title">🧮 Calculateur rapide</h5>
+                <div class="mb-2">
+                    <label class="form-label small">Prix d'achat (champi)</label>
+                    <input type="number" class="form-control form-control-sm" id="quick-purchase" placeholder="800">
+                </div>
+                <div class="mb-2">
+                    <label class="form-label small">Prix de vente (champi)</label>
+                    <input type="number" class="form-control form-control-sm" id="quick-sell" placeholder="1000">
+                </div>
+                <div class="mb-2">
+                    <label class="form-label small">Taxe (%)</label>
+                    <input type="number" class="form-control form-control-sm" id="quick-tax" placeholder="10" value="10">
+                </div>
+                <button class="btn btn-success btn-sm" onclick="quickCalculate()">Calculer</button>
+                <div id="quick-result" class="mt-2"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function quickCalculate() {
+    const purchase = parseFloat(document.getElementById('quick-purchase').value) || 0;
+    const sell = parseFloat(document.getElementById('quick-sell').value) || 0;
+    const tax = parseFloat(document.getElementById('quick-tax').value) || 10;
+    
+    if (purchase === 0 || sell === 0) {
+        document.getElementById('quick-result').innerHTML = 
+            '<div class="alert alert-warning">Veuillez saisir les prix</div>';
+        return;
+    }
+    
+    const taxAmount = sell * (tax / 100);
+    const profit = sell - taxAmount - purchase;
+    const margin = purchase > 0 ? (profit / purchase * 100) : 0;
+    
+    const resultClass = profit >= 0 ? 'alert-success' : 'alert-danger';
+    
+    document.getElementById('quick-result').innerHTML = 
+        `<div class="alert ${resultClass}">
+            <strong>Résultat:</strong><br>
+            Profit: ${profit.toFixed(2)} champi<br>
+            Marge: ${margin.toFixed(1)}%
+        </div>`;
+}
+</script>
+{% endblock %}

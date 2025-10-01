@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}À propos - Mon Site Web{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8">
+        <h1 class="display-4">À propos de ce projet</h1>
+        <p class="lead">Ce site web a été créé avec Flask, un micro-framework web Python.</p>
+        
+        <h2>Technologies utilisées</h2>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <strong>Flask</strong> - Framework web Python léger et flexible
+            </li>
+            <li class="list-group-item">
+                <strong>Jinja2</strong> - Moteur de templates pour Python
+            </li>
+            <li class="list-group-item">
+                <strong>Bootstrap 5</strong> - Framework CSS pour un design responsive
+            </li>
+            <li class="list-group-item">
+                <strong>JavaScript</strong> - Pour l'interactivité côté client
+            </li>
+        </ul>
+        
+        <h2 class="mt-4">Fonctionnalités</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <ul>
+                    <li>Navigation responsive</li>
+                    <li>Système de messages flash</li>
+                    <li>Gestion des erreurs 404/500</li>
+                    <li>API REST simple</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <ul>
+                    <li>Formulaires de contact</li>
+                    <li>Design moderne et élégant</li>
+                    <li>Structure modulaire</li>
+                    <li>Code bien organisé</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h5>Développement</h5>
+            </div>
+            <div class="card-body">
+                <p>Ce projet est conçu pour être facilement extensible et modifiable.</p>
+                <p>Vous pouvez ajouter de nouvelles routes, pages, et fonctionnalités selon vos besoins.</p>
+            </div>
+        </div>
+        
+        <div class="card mt-3">
+            <div class="card-header">
+                <h5>Prochaines étapes</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li>✅ Structure de base</li>
+                    <li>✅ Templates HTML</li>
+                    <li>✅ CSS et JavaScript</li>
+                    <li>🔄 Base de données</li>
+                    <li>🔄 Authentification</li>
+                    <li>🔄 API avancée</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

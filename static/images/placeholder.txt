@@ -1,0 +1,16 @@
+# Dossier images
+
+Ce dossier contient les images du site web.
+
+Vous pouvez ajouter ici :
+- logo.png (logo du site)
+- favicon.ico (icône du site)
+- hero-image.jpg (image d'accueil)
+- profile.jpg (photo de profil)
+- et autres images nécessaires
+
+Formats recommandés :
+- PNG pour les logos et icônes
+- JPG pour les photos
+- SVG pour les illustrations vectorielles
+- WebP pour une meilleure compression

@@ -1,0 +1,199 @@
+{% extends "base.html" %}
+
+{% block title %}Modifier le dinosaure - Dino Tracker{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow">
+            <div class="card-header text-center">
+                <h4>✏️ Modifier l'objet</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST" id="dinoForm">
+                    {{ form.hidden_tag() }}
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            {{ form.name.label(class="form-label") }}
+                            {{ form.name(class="form-control", placeholder="ex: Rex Alpha") }}
+                            {% if form.name.errors %}
+                                <div class="text-danger small">
+                                    {% for error in form.name.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            {{ form.dino_type.label(class="form-label") }}
+                            {{ form.dino_type(class="form-select") }}
+                            {% if form.dino_type.errors %}
+                                <div class="text-danger small">
+                                    {% for error in form.dino_type.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            {{ form.purchase_price.label(class="form-label") }}
+                            <div class="input-group">
+                                {{ form.purchase_price(class="form-control", id="purchase_price", placeholder="800") }}
+                                <span class="input-group-text">champi</span>
+                            </div>
+                            {% if form.purchase_price.errors %}
+                                <div class="text-danger small">
+                                    {% for error in form.purchase_price.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            {{ form.sell_price.label(class="form-label") }}
+                            <div class="input-group">
+                                {{ form.sell_price(class="form-control", id="sell_price", placeholder="1000") }}
+                                <span class="input-group-text">champi</span>
+                            </div>
+                            {% if form.sell_price.errors %}
+                                <div class="text-danger small">
+                                    {% for error in form.sell_price.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            {{ form.quantity.label(class="form-label") }}
+                            {{ form.quantity(class="form-control", id="quantity") }}
+                            {% if form.quantity.errors %}
+                                <div class="text-danger small">
+                                    {% for error in form.quantity.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            {{ form.tax_rate.label(class="form-label") }}
+                            <div class="input-group">
+                                {{ form.tax_rate(class="form-control", id="tax_rate") }}
+                                <span class="input-group-text">%</span>
+                            </div>
+                            {% if form.tax_rate.errors %}
+                                <div class="text-danger small">
+                                    {% for error in form.tax_rate.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        {{ form.notes.label(class="form-label") }}
+                        {{ form.notes(class="form-control", rows="3", placeholder="Notes optionnelles...") }}
+                        {% if form.notes.errors %}
+                            <div class="text-danger small">
+                                {% for error in form.notes.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Calculateur en temps réel -->
+                    <div class="card bg-light mb-3">
+                        <div class="card-header">
+                            <h6>🧮 Aperçu des calculs</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><strong>Coût total:</strong> <span id="total_cost">0</span> champi</p>
+                                    <p><strong>Chiffre d'affaires:</strong> <span id="total_revenue">0</span> champi</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><strong>Taxes:</strong> <span id="tax_amount">0</span> champi</p>
+                                    <p><strong>Profit net:</strong> <span id="net_profit" class="fw-bold">0</span> champi</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <p><strong>Marge de profit:</strong> <span id="profit_margin">0</span>%</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{{ url_for('dashboard') }}" class="btn btn-secondary me-md-2">Annuler</a>
+                        <button type="submit" class="btn btn-primary">Sauvegarder les modifications</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const purchasePrice = document.getElementById('purchase_price');
+    const sellPrice = document.getElementById('sell_price');
+    const quantity = document.getElementById('quantity');
+    const taxRate = document.getElementById('tax_rate');
+    
+    function calculateProfit() {
+        const purchase = parseFloat(purchasePrice.value) || 0;
+        const sell = parseFloat(sellPrice.value) || 0;
+        const qty = parseInt(quantity.value) || 1;
+        const tax = parseFloat(taxRate.value) || 10;
+        
+        const totalCost = purchase * qty;
+        const totalRevenue = sell * qty;
+        const taxAmount = totalRevenue * (tax / 100);
+        const netProfit = totalRevenue - taxAmount - totalCost;
+        const profitMargin = totalCost > 0 ? (netProfit / totalCost) * 100 : 0;
+        
+        document.getElementById('total_cost').textContent = totalCost.toFixed(0);
+        document.getElementById('total_revenue').textContent = totalRevenue.toFixed(0);
+        document.getElementById('tax_amount').textContent = taxAmount.toFixed(0);
+        document.getElementById('net_profit').textContent = netProfit.toFixed(0);
+        document.getElementById('profit_margin').textContent = profitMargin.toFixed(1);
+        
+        // Changer la couleur selon le profit
+        const profitElement = document.getElementById('net_profit');
+        const marginElement = document.getElementById('profit_margin');
+        
+        if (netProfit >= 0) {
+            profitElement.className = 'fw-bold text-success';
+            marginElement.className = 'text-success';
+        } else {
+            profitElement.className = 'fw-bold text-danger';
+            marginElement.className = 'text-danger';
+        }
+    }
+    
+    // Écouter les changements
+    purchasePrice.addEventListener('input', calculateProfit);
+    sellPrice.addEventListener('input', calculateProfit);
+    quantity.addEventListener('input', calculateProfit);
+    taxRate.addEventListener('input', calculateProfit);
+    
+    // Calcul initial
+    calculateProfit();
+});
+</script>
+{% endblock %}
